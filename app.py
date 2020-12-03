@@ -1,5 +1,8 @@
 # import flask dependencies
 from flask import Flask, request, make_response, jsonify
+import pandas as pd
+
+df = pd.read_csv('New.csv')
 
 # initialize the flask app
 app = Flask(__name__)
