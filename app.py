@@ -5,7 +5,7 @@ import pandas as pd
 # initialize the flask app
 app = Flask(__name__)
 
-#df = pd.read_csv('https://github.com/koshalnirwan/flask/blob/main/New.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/koshalnirwan/flask/main/New.csv',error_bad_lines=False)
 
 # default route
 @app.route('/')
@@ -25,12 +25,10 @@ def results():
     elif action == 'put_results':
         return {'fulfillmentText':'This is a response from webhook for name.'}
     elif action == 'set_results':
-        #res = fetch_name(req)
-        return {'fulfillmentText': 'Hello'}
+        res = fetch_name(req)
+        return {'fulfillmentText': res}
   
 def fetch_name(req):
-  with open(request.files["portfolios"]) as csvfile:
-            portfolios = csv.DictReader(csvfile)
   element = req.get('queryResult').get('parameters').get('medicine').get('name')
   result  = list(df["Caution"][df['Name']==element].values)
   return(result)
