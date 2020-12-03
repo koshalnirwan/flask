@@ -5,7 +5,7 @@ import pandas as pd
 # initialize the flask app
 app = Flask(__name__)
 
-df = pd.read_csv('https://raw.githubusercontent.com/koshalnirwan/flask/main/New.csv',error_bad_lines=False)
+#df = pd.read_csv('https://raw.githubusercontent.com/koshalnirwan/flask/main/New.csv',error_bad_lines=False)
 
 # default route
 @app.route('/')
@@ -30,8 +30,8 @@ def results():
   
 def fetch_name(req):
   element = req.get('queryResult').get('parameters').get('medicine').get('name')
-  result  = list(df["Caution"][df['Name']==element].values)
-  return(result)
+  #result  = list(df["Caution"][df['Name']==element].values)
+  return element
     
 # create a route for webhook
 @app.route('/webhook', methods=['GET', 'POST'])
