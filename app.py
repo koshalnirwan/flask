@@ -10,7 +10,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/koshalnirwan/flask/main/New.
 # default route
 @app.route('/')
 def index():
-    return print(df.head())
+    return 'Hello'
 
 # function for responses
 def results():
@@ -21,7 +21,7 @@ def results():
     action = req.get('queryResult').get('action')
     
     if action == 'get_results':
-        return {'fulfillmentText':'This is a response from webhook for color.'}
+        return {'fulfillmentText':df.iloc[2:1]}#'This is a response from webhook for color.'}
     elif action == 'put_results':
         return {'fulfillmentText':'This is a response from webhook for name.'}
     elif action == 'set_results':
@@ -30,7 +30,7 @@ def results():
   
 def fetch_name(req):
   element = req.get('queryResult').get('parameters').get('medicine').get('name')
-  result  = list(df["Caution"][df['Name']==element].values)
+  result  = df.iloc[1:1]
   return result
     
 # create a route for webhook
