@@ -5,12 +5,13 @@ import pandas as pd
 # initialize the flask app
 app = Flask(__name__)
 
-df = pd.read_csv('https://github.com/koshalnirwan/flask/blob/main/New.csv')
+#df = pd.read_csv('https://github.com/koshalnirwan/flask/blob/main/New.csv')
 
 # default route
 @app.route('/')
 def index():
-    return 'Hello World!'
+    return """<iframe width="350" height="430" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/9e85e733-ec1c-461f-aaba-2e4d7ed71fd2"></iframe>"""
+    #return 'Hello World!'
 
 # function for responses
 def results():
@@ -25,13 +26,13 @@ def results():
     elif action == 'put_results':
         return {'fulfillmentText':'This is a response from webhook for name.'}
     elif action == 'set_results':
-        res = fetch_name(req)
-        return {'fulfillmentText': res}
+        #res = fetch_name(req)
+        return {'fulfillmentText': 'Hello'}
   
-def fetch_name(req):
-  element = req.get('queryResult').get('parameters').get('medicine').get('name')
-  result  = list(df["Caution"][df['Name']==element].values)
-  return(result)
+#def fetch_name(req):
+#  element = req.get('queryResult').get('parameters').get('medicine').get('name')
+#  result  = list(df["Caution"][df['Name']==element].values)
+#  return(result)
     
 # create a route for webhook
 @app.route('/webhook', methods=['GET', 'POST'])
