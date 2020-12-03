@@ -2,10 +2,10 @@
 from flask import Flask, request, make_response, jsonify
 import pandas as pd
 
-df = pd.read_csv('New.csv')
-
 # initialize the flask app
 app = Flask(__name__)
+
+df = pd.read_csv('New.csv')
 
 # default route
 @app.route('/')
@@ -25,11 +25,14 @@ def results():
     elif action == 'put_results':
         return {'fulfillmentText':'This is a response from webhook for name.'}
     elif action == 'set_results':
-        return {'fulfillmentText':'This is a response from webhook for medicine.'}
+        res = fetch_name(req)
+        return {'fulfillmentText': res}
+  
+def fetch_name(req):
+  element = req.get('queryResult').get('parameters').get('medicine').get('name')
+  result  = list(df["Caution"][df['Name']==element].values)
+  return(result)
     
-    # return a fulfillment response
-    #return {'fulfillmentText':'This is a response from webhook.'}
-
 # create a route for webhook
 @app.route('/webhook', methods=['GET', 'POST'])
 def webhook():
