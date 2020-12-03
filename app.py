@@ -5,7 +5,7 @@ import pandas as pd
 # initialize the flask app
 app = Flask(__name__)
 
-df = pd.read_csv('https://raw.githubusercontent.com/koshalnirwan/flask/main/New.csv',error_bad_lines=False)
+#df = pd.read_csv('https://raw.githubusercontent.com/koshalnirwan/flask/main/New.csv',error_bad_lines=False)
 
 # default route
 @app.route('/')
@@ -21,7 +21,7 @@ def results():
     action = req.get('queryResult').get('action')
     
     if action == 'get_results':
-        return {'fulfillmentText':df.iloc[2:1]}#'This is a response from webhook for color.'}
+        return {'fulfillmentText':'This is a response from webhook for color.'}
     elif action == 'put_results':
         return {'fulfillmentText':'This is a response from webhook for name.'}
     elif action == 'set_results':
@@ -29,6 +29,7 @@ def results():
         return {'fulfillmentText': res}
   
 def fetch_name(req):
+  df = pd.read_csv('https://raw.githubusercontent.com/koshalnirwan/flask/main/New.csv',error_bad_lines=False)
   element = req.get('queryResult').get('parameters').get('medicine').get('name')
   result  = df.iloc[1:1]
   return result
