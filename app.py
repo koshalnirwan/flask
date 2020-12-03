@@ -9,7 +9,7 @@ app = Flask(__name__)
 # default route
 @app.route('/')
 def index():
-  return 'Medical World!'
+  return "<h1>Welcome to our server !!</h1>"
 
 #function for responses
 #def results():
@@ -36,7 +36,7 @@ def webhook():
   # return response
   #return "Koshal Singh"
   #return make_response(jsonify(results()))
-  return 'hello world'
+  return "<h1>Welcome to my server !!</h1>"
 #run the app
 if __name__ == '__main__':
   app.run(threaded=True, port=5000)
