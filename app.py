@@ -1,51 +1,42 @@
-# app.py
-from flask import Flask, request, jsonify
+# import flask dependencies
+from flask import Flask, request, make_response, jsonify
+import pandas as pd
+
+# initialize the flask app
 app = Flask(__name__)
 
-@app.route('/getmsg/', methods=['GET'])
-def respond():
-    # Retrieve the name from url parameter
-    name = request.args.get("name", None)
-
-    # For debugging
-    print(f"got name {name}")
-
-    response = {}
-
-    # Check if user sent a name at all
-    if not name:
-        response["ERROR"] = "no name found, please send a name."
-    # Check if the user entered a number not a name
-    elif str(name).isdigit():
-        response["ERROR"] = "name can't be numeric."
-    # Now the user entered a valid name
-    else:
-        response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
-
-    # Return the response in json format
-    return jsonify(response)
-
-@app.route('/post/', methods=['POST'])
-def post_something():
-    param = request.form.get('name')
-    print(param)
-    # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
-    if param:
-        return jsonify({
-            "Message": f"Welcome {name} to our awesome platform!!",
-            # Add this option to distinct the POST request
-            "METHOD" : "POST"
-        })
-    else:
-        return jsonify({
-            "ERROR": "no name found, please send a name."
-        })
-
-# A welcome message to test our server
+df = pd.read_csv("med_100.csv")
+# default route
 @app.route('/')
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+  return 'Medical World!'
 
+#function for responses
+def results():
+  # build a request object
+  req = request.get_json(force=True)  
+  #fetch action from json
+  action = req.get('queryResult').get('action')  
+  if action == 'med_results':
+    res = calculate_sales(req)
+   
+  #action = 'Hi, I just wanted to check'  
+  #return a fulfillment response
+  return {'fulfillmentText': res}
+  
+def calculate_sales(req):
+  element = req.get('queryResult').get('parameters').get('medicine').get('name')  
+  med_link  = df[df['lower']==element].values 
+  result = med_link[0,1]
+  return(result)
+  
+#create a route for webhook
+@app.route('/webhook', methods=['GET', 'POST'])
+def webhook():
+  # return response
+  #return "Koshal Singh"
+  #return make_response(jsonify(results()))
+  return 'hello world'
+#run the app
 if __name__ == '__main__':
-    # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+  app.run(threaded=True, port=5000)
