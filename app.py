@@ -31,7 +31,7 @@ def results():
 def fetch_name(req):
   element = req.get('queryResult').get('parameters').get('medicine').get('name')
   #result  = df.iloc[1:1]
-  return element
+  return 'Ram Ram'
     
 # create a route for webhook
 @app.route('/webhook', methods=['GET', 'POST'])
