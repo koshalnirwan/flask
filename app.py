@@ -25,13 +25,13 @@ def results():
     elif action == 'put_results':
         return {'fulfillmentText':'This is a response from webhook for name.'}
     elif action == 'set_results':
-        res = fetch_name(req)
-        return {'fulfillmentText': res}
+        #res = fetch_name(req)
+        return {'fulfillmentText': 'hello'}
   
-def fetch_name(req):
-  element = req.get('queryResult').get('parameters').get('medicine').get('name')
-  #result  = list(df["Caution"][df['Name']==element].values)
-  return element
+#def fetch_name(req):
+#  element = req.get('queryResult').get('parameters').get('medicine').get('name')
+#  #result  = list(df["Caution"][df['Name']==element].values)
+#  return element
     
 # create a route for webhook
 @app.route('/webhook', methods=['GET', 'POST'])
