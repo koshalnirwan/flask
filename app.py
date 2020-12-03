@@ -21,6 +21,8 @@ def results():
         return {'fulfillmentText':'This is a response from webhook for color.'}
     elif action == 'put_results':
         return {'fulfillmentText':'This is a response from webhook for name.'}
+    elif action == 'set_results':
+        return {'fulfillmentText':'This is a response from webhook for medicine.'}
     
     # return a fulfillment response
     #return {'fulfillmentText':'This is a response from webhook.'}
