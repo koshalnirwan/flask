@@ -5,7 +5,7 @@ import pandas as pd
 # initialize the flask app
 app = Flask(__name__)
 
-df = pd.read_csv('New.csv')
+df = pd.read_csv('https://github.com/koshalnirwan/flask/blob/main/New.csv')
 
 # default route
 @app.route('/')
