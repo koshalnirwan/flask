@@ -33,7 +33,8 @@ def results():
 def fetch_name(req):
     #element = req.get('queryResult').get('parameters').get('medicine').get('name')
     try:
-        element = input_params['medicine']
+        #element = input_params['medicine']
+        element = req.get('queryResult').get('parameters').get('medicine').get('name')
         return element
     except:
         return 'Done'
