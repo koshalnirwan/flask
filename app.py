@@ -15,12 +15,9 @@ def index():
 def results():
     # build a request object
     req = request.get_json(force=True)
-   
+    
     #fetch action from json
-    try:
-        action = req.get('queryResult').get('action')
-    except AttributeError:
-        return 'json error
+    action = req.get('queryResult').get('action')
         
     if action == 'get_results':
         res = 'This is a response from webhook for color.'
@@ -35,9 +32,10 @@ def fetch_name(req):
     try:
         #element = input_params['medicine']
         element = req.get('queryResult').get('parameters').get('medicine').get('name')
-        return element
     except:
-        return 'Done'
+        element = 'Done'
+    return element
+        
     #for key,value in df2.items():
     #        for k,v in value.items():
     #           if element==k:
