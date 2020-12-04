@@ -29,7 +29,7 @@ def results():
     return {'fulfillmentText': res}
 def fetch_name(req):
     #element = req.get('queryResult').get('parameters').get('medicine').get('name')
-    var element = agent.contexts[0].parameters['time.original']
+    element = agent.contexts[0].parameters['time.original']
     #element = input_params['medicine']
     return element
     #for key,value in df2.items():
