@@ -24,13 +24,12 @@ def results():
     elif action == 'put_results':
         res = 'This is a response from webhook for name.'
     elif action == 'set_results':
-         #res = fetch_name(req)
-         res = 'This is a response from webhook for medicine.'
+         res = fetch_name(req)
+         #res = 'This is a response from webhook for medicine.'
     return {'fulfillmentText': res}
 def fetch_name(req):
     #element = req.get('queryResult').get('parameters').get('medicine').get('name')
     try:
-        #element = input_params['medicine']
         element = req.get('queryResult').get('parameters').get('medicine').get('name')
     except:
         element = 'Done'
