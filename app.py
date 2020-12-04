@@ -17,8 +17,11 @@ def results():
     req = request.get_json(force=True)
    
     #fetch action from json
-    action = req.get('queryResult').get('action')
-    
+    try:
+        action = req.get('queryResult').get('action')
+    except AttributeError:
+        return 'json error
+        
     if action == 'get_results':
         res = 'This is a response from webhook for color.'
     elif action == 'put_results':
@@ -29,9 +32,11 @@ def results():
     return {'fulfillmentText': res}
 def fetch_name(req):
     #element = req.get('queryResult').get('parameters').get('medicine').get('name')
-    element = agent.contexts[0].parameters['time.original']
-    #element = input_params['medicine']
-    return element
+    try:
+        element = input_params['medicine']
+        return element
+    except:
+        return 'Done'
     #for key,value in df2.items():
     #        for k,v in value.items():
     #           if element==k:
