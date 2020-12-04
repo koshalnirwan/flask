@@ -29,8 +29,9 @@ def results():
     return {'fulfillmentText': res}
 def fetch_name(req):
     #element = req.get('queryResult').get('parameters').get('medicine').get('name')
-    element = input_params['medicine']
-    return (element)
+    var element = agent.contexts[0].parameters['time.original']
+    #element = input_params['medicine']
+    return element
     #for key,value in df2.items():
     #        for k,v in value.items():
     #           if element==k:
