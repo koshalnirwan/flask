@@ -12,7 +12,7 @@ def index():
     return 'Hello World!'
 
 # function for responses
-def results():
+'''def results():
     # build a request object
     req = request.get_json(force=True)
     
@@ -33,7 +33,7 @@ def fetch_name(req):
         element = req.get('queryResult').get('parameters').get('medicine').get('name')
     except:
         element = 'Done'
-    return element
+    return element'''
         
     #for key,value in df2.items():
     #        for k,v in value.items():
@@ -41,10 +41,19 @@ def fetch_name(req):
     #                return v
                 
 # create a route for webhook
-@app.route('/webhook', methods=['GET', 'POST'])
+@app.route('/webhook', methods=['POST'])
 def webhook():
     # return response
-    return make_response(jsonify(results()))
+    req = request.get_json(silent=True, force=True)
+    query_result = req.get('queryResult')
+    
+    if query_result.get('action') == 'set_results':
+        element = query_result.get('parameters').get('medicine')
+    #num2 = int(query_result.get('parameters').get('number1'))
+    
+    #fulfillmentText = element
+    return {"fulfillmenttext":element}
+    #return make_response(jsonify(results()))
 
 # run the app
 if __name__ == '__main__':
