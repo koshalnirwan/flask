@@ -48,7 +48,7 @@ def webhook():
     query_result = req.get('queryResult')
     
     if query_result.get('action') == 'set_results':
-        element = query_result.get('parameters').get('medicine')
+        element = str(query_result.get('parameters').get('medicine'))
     #num2 = int(query_result.get('parameters').get('number1'))
     
     #fulfillmentText = element
