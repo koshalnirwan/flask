@@ -12,7 +12,6 @@ def index():
     return 'Hello World!'
 
 @app.route('/webhook', methods=['GET','POST'])
-# function for responses
 def webhook():
     # build a request object
     req = request.get_json(force=True)
@@ -29,17 +28,15 @@ def webhook():
         #res = 'This is a response from webhook for medicine.'
     return {'fulfillmentText': res}
 def fetch_name(req):
-    #element = req.get('queryResult').get('parameters').get('medicine').get('name')
-    try:
-        element = req.get('queryResult').get('parameters').get('medicine')
-    except:
-        element = 'Done'
-    return element
-        
-    #for key,value in df2.items():
-    #        for k,v in value.items():
-    #           if element==k:
-    #                return v
+    #try:
+    element = req.get('queryResult').get('parameters').get('medicine')
+    #except:
+    #    element = 'Done'
+    #return element     
+    for key,value in df2.items():
+            for k,v in value.items():
+               if element==k:
+                    return v
                 
 # create a route for webhook
 #@app.route('/webhook', methods=['POST'])
