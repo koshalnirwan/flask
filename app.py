@@ -31,7 +31,7 @@ def webhook():
 def fetch_name(req):
     #element = req.get('queryResult').get('parameters').get('medicine').get('name')
     try:
-        element = req.get('queryResult').get('parameters').get('medicine').get('name')
+        element = req.get('queryResult').get('parameters').get('medicine')
     except:
         element = 'Done'
     return element
