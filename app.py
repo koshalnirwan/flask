@@ -24,7 +24,8 @@ def webhook():
     elif action == 'put_results':
         res = 'This is a response from webhook for name.'
     elif action == 'set_results':
-        global med = fetch_name(req)
+        global med 
+        med= fetch_name(req)
         res = f'What do you want to know about {med}'.format(med) + '\n\n\n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'
     elif action == 'great_action':
         respond = about_med(req)
