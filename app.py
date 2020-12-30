@@ -30,7 +30,7 @@ def webhook():
         #url = f'https://www.webmd.com/drugs/2/search?type=drugs&query={med}'.format(med)
     elif action == 'great_action':
         respond = about_med(req)
-        res = respond + med
+        res = respond 
         '''url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
         req = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"})
         response = urllib.request.urlopen( req )
