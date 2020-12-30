@@ -16,7 +16,7 @@ def webhook():
     # build a request object
     req = request.get_json(force=True)
     query_result = req.get('queryResult')
-    fetch action from json
+    #fetch action from json
     action = req.get('queryResult').get('action')
     
     if action == 'get_results':
