@@ -24,18 +24,17 @@ def webhook():
     elif action == 'put_results':
         res = 'This is a response from webhook for name.'
     elif action == 'set_results':
-        #global med 
         med= fetch_name(req)
-        res = f'What do you want to know about {med}'.format(med) + '\n\n\n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'
-    elif action == 'great_action':
+        #res = f'What do you want to know about {med}'.format(med) + '\n\n\n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'
+        
         respond = about_med(req) 
-        med= fetch_name(req)
+        #med= fetch_name(req)
         url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
-        req = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"})
-        response = urllib.request.urlopen( req )
+        requ = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"})
+        response = urllib.request.urlopen( requ )
         html = response.read()
         soup = BeautifulSoup(html, 'html.parser')
-        if respond == 'Uses'or respond == 'uses':
+        if 'Uses' in respond:
             rs = soup.find('div',{'id':'tab-1'})
             rs2 = rs.find_all('p')
             res = rs2[0].text
