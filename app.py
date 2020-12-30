@@ -27,8 +27,8 @@ def webhook():
         #global med 
         med= fetch_name(req)
         res = f'What do you want to know about {med}'.format(med) + '\n\n\n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'
-        url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
-    elif action == 'great_action':
+    url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
+    if action == 'great_action':
         respond = about_med(req)
         #url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
         req = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"})
