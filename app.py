@@ -27,12 +27,10 @@ def webhook():
         #global med 
         med= fetch_name(req)
         res = f'What do you want to know about {med}'.format(med) + '\n\n\n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'
-        #url = f'https://www.webmd.com/drugs/2/search?type=drugs&query={med}'.format(med)
-    red = med
-    if action == 'great_action':
-        respond = about_med(req)
-        res = red 
-        '''url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
+    elif action == 'great_action':
+        respond = about_med(req) 
+        med= fetch_name(req)
+        url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
         req = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"})
         response = urllib.request.urlopen( req )
         html = response.read()
@@ -42,7 +40,7 @@ def webhook():
             rs2 = rs.find_all('p')
             res = rs2[0].text
             #for i in range(2):
-                #res = rs2[i].text'''
+                #res = rs2[i].text
         
     return {'fulfillmentText': res}
 
