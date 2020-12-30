@@ -25,7 +25,7 @@ def webhook():
         res = 'This is a response from webhook for name.'
     elif action == 'set_results':
         med = fetch_name(req)
-        res = f'What do you want to know about {med} \n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'.format(med)
+        res = f'What do you want to know about {med}'.format(med) + '\n\n\n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'
     return {'fulfillmentText': res}
 
 def fetch_name(req):
