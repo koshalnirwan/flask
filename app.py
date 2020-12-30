@@ -24,35 +24,17 @@ def webhook():
     elif action == 'put_results':
         res = 'This is a response from webhook for name.'
     elif action == 'set_results':
-        res = fetch_name(req)
-        #res = 'This is a response from webhook for medicine.'
+        med = fetch_name(req)
+        res = f'What do you want to know about {med} \n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'.format(med)
     return {'fulfillmentText': res}
+
 def fetch_name(req):
-    #try:
-    element = req.get('queryResult').get('parameters').get('medicine')
-    #except:
-    #    element = 'Done'
-    #return element     
-    for key,value in df2.items():
+    element = req.get('queryResult').get('parameters').get('medicine')     
+    '''for key,value in df2.items():
             for k,v in value.items():
                if element==k:
-                    return v
-                
-# create a route for webhook
-#@app.route('/webhook', methods=['POST'])
-'''def webhook():
-    # return response
-    req = request.get_json(silent=True, force=True)
-    query_result = req.get('queryResult')
-    
-    if query_result.get('action') == 'set_results':
-        element = str(query_result.get('parameters').get('medicine'))
-    #num2 = int(query_result.get('parameters').get('number1'))
-    
-    #fulfillmentText = element
-    return {"fulfillmenttext":element}
-    #return make_response(jsonify(results()))'''
-
+                    return'''
+    return element
 # run the app
 if __name__ == '__main__':
    app.run(threaded=True, port=5000)
