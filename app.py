@@ -34,10 +34,10 @@ def webhook():
         response = urllib.request.urlopen( requ )
         html = response.read()
         soup = BeautifulSoup(html, 'html.parser')
-        if 'Uses' in respond:
-            rs = soup.find('div',{'id':'tab-1'})
-            rs2 = rs.find_all('p')
-            res = rs2[0].text
+        #if med in respond:
+        rs = soup.find('div',{'id':'tab-1'})
+        rs2 = rs.find_all('p')
+        res = rs2[0].text
             #for i in range(2):
                 #res = rs2[i].text
         
