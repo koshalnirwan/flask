@@ -1,15 +1,15 @@
 # import flask dependencies
 from flask import Flask, request, make_response, jsonify
 import pandas as pd
+from bs4 import BeautifulSoup
+import urllib.request
+
 # initialize the flask app
 app = Flask(__name__)
 
-df = pd.read_csv('New.csv',index_col=0)
-df2 = df.to_dict()
-
 @app.route('/')
 def index():
-    return 'Hello World!'
+    return 'Medbot!'
 
 @app.route('/webhook', methods=['GET','POST'])
 def webhook():
@@ -27,16 +27,27 @@ def webhook():
         med = fetch_name(req)
         res = f'What do you want to know about {med}'.format(med) + '\n\n\n Uses \n Side Effects \n Precautions \n Interactions \n Overdose'
     elif action == 'great_action':
-        res = 'done sucessfully'
+        respond = about_med(req)
+        url = 'https://www.webmd.com/drugs/2/search?type=drugs&query='+med
+        req = urllib.request.Request(url, headers={'User-Agent' : "Magic Browser"})
+        response = urllib.request.urlopen( req )
+        html = response.read()
+        soup = BeautifulSoup(html, 'html.parser')
+        if respond == 'Uses'or respond == 'uses':
+            rs = soup.find('div',{'id':'tab-1'})
+            rs2 = rs.find_all('p')
+            for i in range(2):
+                res = rs2[i].text
+        
     return {'fulfillmentText': res}
 
 def fetch_name(req):
     element = req.get('queryResult').get('parameters').get('medicine')     
-    '''for key,value in df2.items():
-            for k,v in value.items():
-               if element==k:
-                    return'''
     return element
+
+def about_med(req):
+    element2 = req.get('queryResult').get('parameters').get('user_select')     
+    return element2
 # run the app
 if __name__ == '__main__':
    app.run(threaded=True, port=5000)
